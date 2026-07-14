@@ -1,0 +1,533 @@
+country,iso2c,iso3c,year,population
+Africa Eastern and Southern,ZH,AFE,2025,NA
+Africa Eastern and Southern,ZH,AFE,2024,769280888
+Africa Western and Central,ZI,AFW,2025,NA
+Africa Western and Central,ZI,AFW,2024,521764076
+Arab World,1A,ARB,2025,NA
+Arab World,1A,ARB,2024,492612632
+Caribbean small states,S3,CSS,2025,NA
+Caribbean small states,S3,CSS,2024,4539060
+Central Europe and the Baltics,B8,CEB,2025,NA
+Central Europe and the Baltics,B8,CEB,2024,100061963
+Early-demographic dividend,V2,EAR,2025,NA
+Early-demographic dividend,V2,EAR,2024,3552278604
+East Asia & Pacific,Z4,EAS,2025,NA
+East Asia & Pacific,Z4,EAS,2024,2388319494
+East Asia & Pacific (excluding high income),4E,EAP,2025,NA
+East Asia & Pacific (excluding high income),4E,EAP,2024,2141122258
+East Asia & Pacific (IDA & IBRD countries),T4,TEA,2025,NA
+East Asia & Pacific (IDA & IBRD countries),T4,TEA,2024,2114653077
+Euro area,XC,EMU,2025,NA
+Euro area,XC,EMU,2024,351161936
+Europe & Central Asia,Z7,ECS,2025,NA
+Europe & Central Asia,Z7,ECS,2024,928263208
+Europe & Central Asia (excluding high income),7E,ECA,2025,NA
+Europe & Central Asia (excluding high income),7E,ECA,2024,250281521
+Europe & Central Asia (IDA & IBRD countries),T7,TEC,2025,NA
+Europe & Central Asia (IDA & IBRD countries),T7,TEC,2024,459734030
+European Union,EU,EUU,2025,NA
+European Union,EU,EUU,2024,450228188
+Fragile and conflict affected situations,F1,FCS,2025,NA
+Fragile and conflict affected situations,F1,FCS,2024,1081767572
+Heavily indebted poor countries (HIPC),XE,HPC,2025,NA
+Heavily indebted poor countries (HIPC),XE,HPC,2024,941413026
+High income,XD,,2025,NA
+High income,XD,,2024,1417841927
+IBRD only,XF,IBD,2025,NA
+IBRD only,XF,IBD,2024,4979421568
+IDA & IBRD total,ZT,IBT,2025,NA
+IDA & IBRD total,ZT,IBT,2024,6926222113
+IDA blend,XH,IDB,2025,NA
+IDA blend,XH,IDB,2024,676957651
+IDA only,XI,IDX,2025,NA
+IDA only,XI,IDX,2024,1269842894
+IDA total,XG,IDA,2025,NA
+IDA total,XG,IDA,2024,1946800545
+Late-demographic dividend,V3,LTE,2025,NA
+Late-demographic dividend,V3,LTE,2024,2328628339
+Latin America & Caribbean,ZJ,LCN,2025,NA
+Latin America & Caribbean,ZJ,LCN,2024,662186388
+Latin America & Caribbean (excluding high income),XJ,LAC,2025,NA
+Latin America & Caribbean (excluding high income),XJ,LAC,2024,594158638
+Latin America & the Caribbean (IDA & IBRD countries),T2,TLA,2025,NA
+Latin America & the Caribbean (IDA & IBRD countries),T2,TLA,2024,647003746
+Least developed countries: UN classification,XL,LDC,2025,NA
+Least developed countries: UN classification,XL,LDC,2024,1187777591
+Low & middle income,XO,LMY,2025,NA
+Low & middle income,XO,LMY,2024,6563501708
+Low income,XM,,2025,NA
+Low income,XM,,2024,624608098
+Lower middle income,XN,,2025,NA
+Lower middle income,XN,,2024,3120980912
+"Middle East, North Africa, Afghanistan & Pakistan",ZQ,MEA,2025,NA
+"Middle East, North Africa, Afghanistan & Pakistan",ZQ,MEA,2024,813146136
+"Middle East, North Africa, Afghanistan & Pakistan (excluding high income)",XQ,MNA,2025,NA
+"Middle East, North Africa, Afghanistan & Pakistan (excluding high income)",XQ,MNA,2024,741690916
+"Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)",T3,TMN,2025,NA
+"Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)",T3,TMN,2024,736401764
+Middle income,XP,MIC,2025,NA
+Middle income,XP,MIC,2024,5938893610
+North America,XU,NAC,2025,NA
+North America,XU,NAC,2024,381464223
+Not classified,XY,,2025,NA
+Not classified,XY,,2024,NA
+OECD members,OE,OED,2025,NA
+OECD members,OE,OED,2024,1396877448
+Other small states,S4,OSS,2025,NA
+Other small states,S4,OSS,2024,12931878
+Pacific island small states,S2,PSS,2025,NA
+Pacific island small states,S2,PSS,2024,2722467
+Post-demographic dividend,V4,PST,2025,NA
+Post-demographic dividend,V4,PST,2024,1128377826
+Pre-demographic dividend,V1,PRE,2025,NA
+Pre-demographic dividend,V1,PRE,2024,1105951788
+Small states,S1,SST,2025,NA
+Small states,S1,SST,2024,20193405
+South Asia,8S,SAS,2025,NA
+South Asia,8S,SAS,2024,1677384532
+South Asia (IDA & IBRD),T5,TSA,2025,NA
+South Asia (IDA & IBRD),T5,TSA,2024,1677384532
+Sub-Saharan Africa,ZG,SSF,2025,NA
+Sub-Saharan Africa,ZG,SSF,2024,1291044964
+Sub-Saharan Africa (excluding high income),ZF,SSA,2025,NA
+Sub-Saharan Africa (excluding high income),ZF,SSA,2024,1158863843
+Sub-Saharan Africa (IDA & IBRD countries),T6,TSS,2025,NA
+Sub-Saharan Africa (IDA & IBRD countries),T6,TSS,2024,1291044964
+Upper middle income,XT,,2025,NA
+Upper middle income,XT,,2024,2817912698
+World,1W,WLD,2025,NA
+World,1W,WLD,2024,8141808945
+Afghanistan,AF,AFG,2025,NA
+Afghanistan,AF,AFG,2024,42647492
+Albania,AL,ALB,2025,NA
+Albania,AL,ALB,2024,2377128
+Algeria,DZ,DZA,2025,NA
+Algeria,DZ,DZA,2024,46814308
+American Samoa,AS,ASM,2025,NA
+American Samoa,AS,ASM,2024,46765
+Andorra,AD,AND,2025,NA
+Andorra,AD,AND,2024,81938
+Angola,AO,AGO,2025,NA
+Angola,AO,AGO,2024,37885849
+Antigua and Barbuda,AG,ATG,2025,NA
+Antigua and Barbuda,AG,ATG,2024,93772
+Argentina,AR,ARG,2025,NA
+Argentina,AR,ARG,2024,45696159
+Armenia,AM,ARM,2025,NA
+Armenia,AM,ARM,2024,3033500
+Aruba,AW,ABW,2025,NA
+Aruba,AW,ABW,2024,107995
+Australia,AU,AUS,2025,NA
+Australia,AU,AUS,2024,27196812
+Austria,AT,AUT,2025,NA
+Austria,AT,AUT,2024,9177982
+Azerbaijan,AZ,AZE,2025,NA
+Azerbaijan,AZ,AZE,2024,10202830
+"Bahamas, The",BS,BHS,2025,NA
+"Bahamas, The",BS,BHS,2024,401283
+Bahrain,BH,BHR,2025,NA
+Bahrain,BH,BHR,2024,1588670
+Bangladesh,BD,BGD,2025,NA
+Bangladesh,BD,BGD,2024,173562364
+Barbados,BB,BRB,2025,NA
+Barbados,BB,BRB,2024,282467
+Belarus,BY,BLR,2025,NA
+Belarus,BY,BLR,2024,9132629
+Belgium,BE,BEL,2025,NA
+Belgium,BE,BEL,2024,11858610
+Belize,BZ,BLZ,2025,NA
+Belize,BZ,BLZ,2024,417072
+Benin,BJ,BEN,2025,NA
+Benin,BJ,BEN,2024,14462724
+Bermuda,BM,BMU,2025,NA
+Bermuda,BM,BMU,2024,64636
+Bhutan,BT,BTN,2025,NA
+Bhutan,BT,BTN,2024,791524
+Bolivia,BO,BOL,2025,NA
+Bolivia,BO,BOL,2024,12413315
+Bosnia and Herzegovina,BA,BIH,2025,NA
+Bosnia and Herzegovina,BA,BIH,2024,3164253
+Botswana,BW,BWA,2025,NA
+Botswana,BW,BWA,2024,2521139
+Brazil,BR,BRA,2025,NA
+Brazil,BR,BRA,2024,211998573
+British Virgin Islands,VG,VGB,2025,NA
+British Virgin Islands,VG,VGB,2024,39471
+Brunei Darussalam,BN,BRN,2025,NA
+Brunei Darussalam,BN,BRN,2024,462721
+Bulgaria,BG,BGR,2025,NA
+Bulgaria,BG,BGR,2024,6441421
+Burkina Faso,BF,BFA,2025,NA
+Burkina Faso,BF,BFA,2024,23548781
+Burundi,BI,BDI,2025,NA
+Burundi,BI,BDI,2024,14047786
+Cabo Verde,CV,CPV,2025,NA
+Cabo Verde,CV,CPV,2024,524877
+Cambodia,KH,KHM,2025,NA
+Cambodia,KH,KHM,2024,17638801
+Cameroon,CM,CMR,2025,NA
+Cameroon,CM,CMR,2024,29123744
+Canada,CA,CAN,2025,NA
+Canada,CA,CAN,2024,41288599
+Cayman Islands,KY,CYM,2025,NA
+Cayman Islands,KY,CYM,2024,74457
+Central African Republic,CF,CAF,2025,NA
+Central African Republic,CF,CAF,2024,5330690
+Chad,TD,TCD,2025,NA
+Chad,TD,TCD,2024,20299123
+Channel Islands,JG,CHI,2025,NA
+Channel Islands,JG,CHI,2024,168126
+Chile,CL,CHL,2025,NA
+Chile,CL,CHL,2024,19764771
+China,CN,CHN,2025,NA
+China,CN,CHN,2024,1408975000
+Colombia,CO,COL,2025,NA
+Colombia,CO,COL,2024,52886363
+Comoros,KM,COM,2025,NA
+Comoros,KM,COM,2024,866628
+"Congo, Dem. Rep.",CD,COD,2025,NA
+"Congo, Dem. Rep.",CD,COD,2024,109276265
+"Congo, Rep.",CG,COG,2025,NA
+"Congo, Rep.",CG,COG,2024,6332961
+Costa Rica,CR,CRI,2025,NA
+Costa Rica,CR,CRI,2024,5129910
+Cote d'Ivoire,CI,CIV,2025,NA
+Cote d'Ivoire,CI,CIV,2024,31934230
+Croatia,HR,HRV,2025,NA
+Croatia,HR,HRV,2024,3866200
+Cuba,CU,CUB,2025,NA
+Cuba,CU,CUB,2024,10979783
+Curacao,CW,CUW,2025,NA
+Curacao,CW,CUW,2024,155967
+Cyprus,CY,CYP,2025,NA
+Cyprus,CY,CYP,2024,1358282
+Czechia,CZ,CZE,2025,NA
+Czechia,CZ,CZE,2024,10905028
+Denmark,DK,DNK,2025,NA
+Denmark,DK,DNK,2024,5976992
+Djibouti,DJ,DJI,2025,NA
+Djibouti,DJ,DJI,2024,1168722
+Dominica,DM,DMA,2025,NA
+Dominica,DM,DMA,2024,66205
+Dominican Republic,DO,DOM,2025,NA
+Dominican Republic,DO,DOM,2024,11427557
+Ecuador,EC,ECU,2025,NA
+Ecuador,EC,ECU,2024,18135478
+"Egypt, Arab Rep.",EG,EGY,2025,NA
+"Egypt, Arab Rep.",EG,EGY,2024,116538258
+El Salvador,SV,SLV,2025,NA
+El Salvador,SV,SLV,2024,6338193
+Equatorial Guinea,GQ,GNQ,2025,NA
+Equatorial Guinea,GQ,GNQ,2024,1892516
+Eritrea,ER,ERI,2025,NA
+Eritrea,ER,ERI,2024,3535603
+Estonia,EE,EST,2025,NA
+Estonia,EE,EST,2024,1372341
+Eswatini,SZ,SWZ,2025,NA
+Eswatini,SZ,SWZ,2024,1242822
+Ethiopia,ET,ETH,2025,NA
+Ethiopia,ET,ETH,2024,132059767
+Faroe Islands,FO,FRO,2025,NA
+Faroe Islands,FO,FRO,2024,54681
+Fiji,FJ,FJI,2025,NA
+Fiji,FJ,FJI,2024,928784
+Finland,FI,FIN,2025,NA
+Finland,FI,FIN,2024,5619911
+France,FR,FRA,2025,NA
+France,FR,FRA,2024,68551653
+French Polynesia,PF,PYF,2025,NA
+French Polynesia,PF,PYF,2024,281807
+Gabon,GA,GAB,2025,NA
+Gabon,GA,GAB,2024,2538952
+"Gambia, The",GM,GMB,2025,NA
+"Gambia, The",GM,GMB,2024,2759988
+Georgia,GE,GEO,2025,NA
+Georgia,GE,GEO,2024,3699557
+Germany,DE,DEU,2025,NA
+Germany,DE,DEU,2024,83516593
+Ghana,GH,GHA,2025,NA
+Ghana,GH,GHA,2024,34427414
+Gibraltar,GI,GIB,2025,NA
+Gibraltar,GI,GIB,2024,39329
+Greece,GR,GRC,2025,NA
+Greece,GR,GRC,2024,10405134
+Greenland,GL,GRL,2025,NA
+Greenland,GL,GRL,2024,56836
+Grenada,GD,GRD,2025,NA
+Grenada,GD,GRD,2024,117207
+Guam,GU,GUM,2025,NA
+Guam,GU,GUM,2024,167777
+Guatemala,GT,GTM,2025,NA
+Guatemala,GT,GTM,2024,18406359
+Guinea,GN,GIN,2025,NA
+Guinea,GN,GIN,2024,14754785
+Guinea-Bissau,GW,GNB,2025,NA
+Guinea-Bissau,GW,GNB,2024,2201352
+Guyana,GY,GUY,2025,NA
+Guyana,GY,GUY,2024,831087
+Haiti,HT,HTI,2025,NA
+Haiti,HT,HTI,2024,11772557
+Honduras,HN,HND,2025,NA
+Honduras,HN,HND,2024,10825703
+"Hong Kong SAR, China",HK,HKG,2025,NA
+"Hong Kong SAR, China",HK,HKG,2024,7524100
+Hungary,HU,HUN,2025,NA
+Hungary,HU,HUN,2024,9562065
+Iceland,IS,ISL,2025,NA
+Iceland,IS,ISL,2024,386506
+India,IN,IND,2025,NA
+India,IN,IND,2024,1450935791
+Indonesia,ID,IDN,2025,NA
+Indonesia,ID,IDN,2024,283487931
+"Iran, Islamic Rep.",IR,IRN,2025,NA
+"Iran, Islamic Rep.",IR,IRN,2024,91567738
+Iraq,IQ,IRQ,2025,NA
+Iraq,IQ,IRQ,2024,46042015
+Ireland,IE,IRL,2025,NA
+Ireland,IE,IRL,2024,5395790
+Isle of Man,IM,IMN,2025,NA
+Isle of Man,IM,IMN,2024,84160
+Israel,IL,ISR,2025,NA
+Israel,IL,ISR,2024,9974400
+Italy,IT,ITA,2025,NA
+Italy,IT,ITA,2024,58952704
+Jamaica,JM,JAM,2025,NA
+Jamaica,JM,JAM,2024,2839175
+Japan,JP,JPN,2025,NA
+Japan,JP,JPN,2024,123975371
+Jordan,JO,JOR,2025,NA
+Jordan,JO,JOR,2024,11552876
+Kazakhstan,KZ,KAZ,2025,NA
+Kazakhstan,KZ,KAZ,2024,20592571
+Kenya,KE,KEN,2025,NA
+Kenya,KE,KEN,2024,56432944
+Kiribati,KI,KIR,2025,NA
+Kiribati,KI,KIR,2024,134518
+"Korea, Dem. People's Rep.",KP,PRK,2025,NA
+"Korea, Dem. People's Rep.",KP,PRK,2024,26498823
+"Korea, Rep.",KR,KOR,2025,NA
+"Korea, Rep.",KR,KOR,2024,51751065
+Kosovo,XK,XKX,2025,NA
+Kosovo,XK,XKX,2024,1594353
+Kuwait,KW,KWT,2025,NA
+Kuwait,KW,KWT,2024,4897263
+Kyrgyz Republic,KG,KGZ,2025,NA
+Kyrgyz Republic,KG,KGZ,2024,7221868
+Lao PDR,LA,LAO,2025,NA
+Lao PDR,LA,LAO,2024,7769819
+Latvia,LV,LVA,2025,NA
+Latvia,LV,LVA,2024,1866124
+Lebanon,LB,LBN,2025,NA
+Lebanon,LB,LBN,2024,5805962
+Lesotho,LS,LSO,2025,NA
+Lesotho,LS,LSO,2024,2337423
+Liberia,LR,LBR,2025,NA
+Liberia,LR,LBR,2024,5612817
+Libya,LY,LBY,2025,NA
+Libya,LY,LBY,2024,7381023
+Liechtenstein,LI,LIE,2025,NA
+Liechtenstein,LI,LIE,2024,40450
+Lithuania,LT,LTU,2025,NA
+Lithuania,LT,LTU,2024,2888278
+Luxembourg,LU,LUX,2025,NA
+Luxembourg,LU,LUX,2024,677012
+"Macao SAR, China",MO,MAC,2025,NA
+"Macao SAR, China",MO,MAC,2024,687000
+Madagascar,MG,MDG,2025,NA
+Madagascar,MG,MDG,2024,31964956
+Malawi,MW,MWI,2025,NA
+Malawi,MW,MWI,2024,21655286
+Malaysia,MY,MYS,2025,NA
+Malaysia,MY,MYS,2024,35557673
+Maldives,MV,MDV,2025,NA
+Maldives,MV,MDV,2024,527799
+Mali,ML,MLI,2025,NA
+Mali,ML,MLI,2024,24478595
+Malta,MT,MLT,2025,NA
+Malta,MT,MLT,2024,568847
+Marshall Islands,MH,MHL,2025,NA
+Marshall Islands,MH,MHL,2024,37548
+Mauritania,MR,MRT,2025,NA
+Mauritania,MR,MRT,2024,5169395
+Mauritius,MU,MUS,2025,NA
+Mauritius,MU,MUS,2024,1245779
+Mexico,MX,MEX,2025,NA
+Mexico,MX,MEX,2024,130861007
+"Micronesia, Fed. Sts.",FM,FSM,2025,NA
+"Micronesia, Fed. Sts.",FM,FSM,2024,113160
+Moldova,MD,MDA,2025,NA
+Moldova,MD,MDA,2024,2402306
+Monaco,MC,MCO,2025,NA
+Monaco,MC,MCO,2024,38631
+Mongolia,MN,MNG,2025,NA
+Mongolia,MN,MNG,2024,3524788
+Montenegro,ME,MNE,2025,NA
+Montenegro,ME,MNE,2024,623525
+Morocco,MA,MAR,2025,NA
+Morocco,MA,MAR,2024,38081173
+Mozambique,MZ,MOZ,2025,NA
+Mozambique,MZ,MOZ,2024,34631766
+Myanmar,MM,MMR,2025,NA
+Myanmar,MM,MMR,2024,54500091
+Namibia,NA,NAM,2025,NA
+Namibia,NA,NAM,2024,3030131
+Nauru,NR,NRU,2025,NA
+Nauru,NR,NRU,2024,11947
+Nepal,NP,NPL,2025,NA
+Nepal,NP,NPL,2024,29651054
+Netherlands,NL,NLD,2025,NA
+Netherlands,NL,NLD,2024,17993485
+New Caledonia,NC,NCL,2025,NA
+New Caledonia,NC,NCL,2024,292639
+New Zealand,NZ,NZL,2025,NA
+New Zealand,NZ,NZL,2024,5287500
+Nicaragua,NI,NIC,2025,NA
+Nicaragua,NI,NIC,2024,6916140
+Niger,NE,NER,2025,NA
+Niger,NE,NER,2024,27032412
+Nigeria,NG,NGA,2025,NA
+Nigeria,NG,NGA,2024,232679478
+North Macedonia,MK,MKD,2025,NA
+North Macedonia,MK,MKD,2024,1824359
+Northern Mariana Islands,MP,MNP,2025,NA
+Northern Mariana Islands,MP,MNP,2024,44278
+Norway,NO,NOR,2025,NA
+Norway,NO,NOR,2024,5572279
+Oman,OM,OMN,2025,NA
+Oman,OM,OMN,2024,5281538
+Pakistan,PK,PAK,2025,NA
+Pakistan,PK,PAK,2024,251269164
+Palau,PW,PLW,2025,NA
+Palau,PW,PLW,2024,17695
+Panama,PA,PAN,2025,NA
+Panama,PA,PAN,2024,4515577
+Papua New Guinea,PG,PNG,2025,NA
+Papua New Guinea,PG,PNG,2024,10576502
+Paraguay,PY,PRY,2025,NA
+Paraguay,PY,PRY,2024,6929153
+Peru,PE,PER,2025,NA
+Peru,PE,PER,2024,34217848
+Philippines,PH,PHL,2025,NA
+Philippines,PH,PHL,2024,115843670
+Poland,PL,POL,2025,NA
+Poland,PL,POL,2024,36559233
+Portugal,PT,PRT,2025,NA
+Portugal,PT,PRT,2024,10694681
+Puerto Rico (US),PR,PRI,2025,NA
+Puerto Rico (US),PR,PRI,2024,3203295
+Qatar,QA,QAT,2025,NA
+Qatar,QA,QAT,2024,2857822
+Romania,RO,ROU,2025,NA
+Romania,RO,ROU,2024,19051804
+Russian Federation,RU,RUS,2025,NA
+Russian Federation,RU,RUS,2024,143533851
+Rwanda,RW,RWA,2025,NA
+Rwanda,RW,RWA,2024,14256567
+Samoa,WS,WSM,2025,NA
+Samoa,WS,WSM,2024,218019
+San Marino,SM,SMR,2025,NA
+San Marino,SM,SMR,2024,33977
+Sao Tome and Principe,ST,STP,2025,NA
+Sao Tome and Principe,ST,STP,2024,235536
+Saudi Arabia,SA,SAU,2025,NA
+Saudi Arabia,SA,SAU,2024,35300280
+Senegal,SN,SEN,2025,NA
+Senegal,SN,SEN,2024,18501984
+Serbia,RS,SRB,2025,NA
+Serbia,RS,SRB,2024,6586476
+Seychelles,SC,SYC,2025,NA
+Seychelles,SC,SYC,2024,121354
+Sierra Leone,SL,SLE,2025,NA
+Sierra Leone,SL,SLE,2024,8642022
+Singapore,SG,SGP,2025,NA
+Singapore,SG,SGP,2024,6036860
+Sint Maarten (Dutch part),SX,SXM,2025,NA
+Sint Maarten (Dutch part),SX,SXM,2024,43350
+Slovak Republic,SK,SVK,2025,NA
+Slovak Republic,SK,SVK,2024,5422069
+Slovenia,SI,SVN,2025,NA
+Slovenia,SI,SVN,2024,2127400
+Solomon Islands,SB,SLB,2025,NA
+Solomon Islands,SB,SLB,2024,819198
+"Somalia, Fed. Rep.",SO,SOM,2025,NA
+"Somalia, Fed. Rep.",SO,SOM,2024,19009151
+South Africa,ZA,ZAF,2025,NA
+South Africa,ZA,ZAF,2024,64007187
+South Sudan,SS,SSD,2025,NA
+South Sudan,SS,SSD,2024,11943408
+Spain,ES,ESP,2025,NA
+Spain,ES,ESP,2024,48848840
+Sri Lanka,LK,LKA,2025,NA
+Sri Lanka,LK,LKA,2024,21916000
+St. Kitts and Nevis,KN,KNA,2025,NA
+St. Kitts and Nevis,KN,KNA,2024,46843
+St. Lucia,LC,LCA,2025,NA
+St. Lucia,LC,LCA,2024,179744
+St. Martin (French part),MF,MAF,2025,NA
+St. Martin (French part),MF,MAF,2024,26129
+St. Vincent and the Grenadines,VC,VCT,2025,NA
+St. Vincent and the Grenadines,VC,VCT,2024,100616
+Sudan,SD,SDN,2025,NA
+Sudan,SD,SDN,2024,50448963
+Suriname,SR,SUR,2025,NA
+Suriname,SR,SUR,2024,634431
+Sweden,SE,SWE,2025,NA
+Sweden,SE,SWE,2024,10569709
+Switzerland,CH,CHE,2025,NA
+Switzerland,CH,CHE,2024,9005582
+Syrian Arab Republic,SY,SYR,2025,NA
+Syrian Arab Republic,SY,SYR,2024,24672760
+Tajikistan,TJ,TJK,2025,NA
+Tajikistan,TJ,TJK,2024,10590927
+Tanzania,TZ,TZA,2025,NA
+Tanzania,TZ,TZA,2024,68560157
+Thailand,TH,THA,2025,NA
+Thailand,TH,THA,2024,71668011
+Timor-Leste,TL,TLS,2025,NA
+Timor-Leste,TL,TLS,2024,1400638
+Togo,TG,TGO,2025,NA
+Togo,TG,TGO,2024,9515236
+Tonga,TO,TON,2025,NA
+Tonga,TO,TON,2024,104175
+Trinidad and Tobago,TT,TTO,2025,NA
+Trinidad and Tobago,TT,TTO,2024,1368333
+Tunisia,TN,TUN,2025,NA
+Tunisia,TN,TUN,2024,12277109
+Turkiye,TR,TUR,2025,NA
+Turkiye,TR,TUR,2024,85518661
+Turkmenistan,TM,TKM,2025,NA
+Turkmenistan,TM,TKM,2024,7494498
+Turks and Caicos Islands,TC,TCA,2025,NA
+Turks and Caicos Islands,TC,TCA,2024,46535
+Tuvalu,TV,TUV,2025,NA
+Tuvalu,TV,TUV,2024,9646
+Uganda,UG,UGA,2025,NA
+Uganda,UG,UGA,2024,50015092
+Ukraine,UA,UKR,2025,NA
+Ukraine,UA,UKR,2024,37860221
+United Arab Emirates,AE,ARE,2025,NA
+United Arab Emirates,AE,ARE,2024,10986400
+United Kingdom,GB,GBR,2025,NA
+United Kingdom,GB,GBR,2024,69226000
+United States,US,USA,2025,NA
+United States,US,USA,2024,340110988
+Uruguay,UY,URY,2025,NA
+Uruguay,UY,URY,2024,3386588
+Uzbekistan,UZ,UZB,2025,NA
+Uzbekistan,UZ,UZB,2024,36361859
+Vanuatu,VU,VUT,2025,NA
+Vanuatu,VU,VUT,2024,327777
+"Venezuela, RB",VE,VEN,2025,NA
+"Venezuela, RB",VE,VEN,2024,28405543
+Viet Nam,VN,VNM,2025,NA
+Viet Nam,VN,VNM,2024,100987686
+Virgin Islands (U.S.),VI,VIR,2025,NA
+Virgin Islands (U.S.),VI,VIR,2024,104377
+West Bank and Gaza,PS,PSE,2025,NA
+West Bank and Gaza,PS,PSE,2024,5289152
+"Yemen, Rep.",YE,YEM,2025,NA
+"Yemen, Rep.",YE,YEM,2024,40583164
+Zambia,ZM,ZMB,2025,NA
+Zambia,ZM,ZMB,2024,21314956
+Zimbabwe,ZW,ZWE,2025,NA
+Zimbabwe,ZW,ZWE,2024,16634373

@@ -1,0 +1,315 @@
+---
+title: "Global Economy Redesign"
+subtitle: "CSC3107 Information Visualization · Team Poster Project"
+author: "Team Lavender"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: show
+    df-print: paged
+execute:
+  warning: false
+  message: false
+---
+
+## Overview
+
+This visualization compares the world's top 15 economies by:
+
+1. Total GDP (market size) — horizontal bar chart
+2. GDP per capita (individual affluence) — horizontal bar chart
+3. Regional GDP share trends (2000–2026) — line chart
+4. Key performance indicators (KPIs) — summary cards
+
+**Data sources:** IMF World Economic Outlook (April 2026) and World Bank.
+**Output:** Combined multi-panel figure saved as `gdp_redesign.png`.
+
+# Setup
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(scales)
+library(patchwork)
+library(ggrepel)
+theme_set(theme_minimal(base_size = 12))
+```
+
+::: {.callout-note appearance="simple" icon=false}
+### **Design Brief**
+**Audience:** Economic and trade policy analysts.
+
+**Analytical Task:** Compare the total economic scale of the top 15 global economies, track regional trajectories over the past decade, and contrast aggregate market size with individual affluence.
+
+**Design Rationale:**
+
+- **Symmetric Horizontal Bars:** Aligned side-by-side to allow direct, eye-movement-only comparison of total GDP (market size) against GDP per capita (prosperity) for the exact same country rows.
+- **Direct-Labeled Line Chart:** Illustrates the global regional shifts from 2016 to 2026, highlighting the dominant scale of Asia's aggregate economy without legend-lookup clutter.
+- **Unified Region Colors:** A cohesive color-blind-friendly palette links regions across all bar, line, and KPI card panels.
+- **Structured KPI Banner:** Synthesizes high-level macro statistics at the bottom for quick executive scanning.
+:::
+
+# Data Preparation
+
+```{r}
+#| label: data-prep
+
+# Data Loading
+gdp_2026_pc <- read_csv("data/gdp_2026_with_percapita.csv", show_col_types = FALSE)
+gdp_long <- read_csv("data/gdp_clean_long.csv", show_col_types = FALSE)
+
+# Top 15 economies by total GDP, ordered for plotting
+top_15 <- gdp_2026_pc |>
+  slice_max(gdp_usd_tn, n = 15) |>
+  mutate(country = fct_reorder(country, gdp_usd_tn))
+
+# Regional GDP share over time (2000–2026)
+regional_trend <- gdp_long |>
+  filter(!is.na(region), year >= 2000, year <= 2026) |>
+  group_by(year, region) |>
+  summarize(gdp_usd_tn = sum(gdp_usd_tn), .groups = "drop_last") |>
+  mutate(share = gdp_usd_tn / sum(gdp_usd_tn))
+
+# Order regions by 2026 GDP (largest first)
+region_order <- regional_trend |>
+  filter(year == 2026) |>
+  arrange(desc(gdp_usd_tn)) |>
+  pull(region)
+
+regional_trend <- regional_trend |>
+  mutate(region = factor(region, levels = region_order))
+
+# Unified Color Palette
+region_colors <- c(
+  "Asia" = "#E63946",
+  "Americas" = "#1D3557",
+  "Europe" = "#2A9D8F",
+  "Oceania" = "#E9C46A",
+  "Africa" = "#6D597A"
+)
+```
+
+## Panel A: Market Size (Total GDP)
+
+The United States and China dominate the global landscape, together accounting for nearly half of the top 15's total output. While the US maintains the top position at $32.4T, China follows closely at $20.9T, with a significant drop-off to the next tier of economies like Germany and Japan.
+
+```{r}
+#| label: plot-a
+plot_a <- ggplot(top_15, aes(x = gdp_usd_tn, y = country, fill = region)) +
+  geom_col(width = 0.75, show.legend = FALSE) +
+  geom_text(
+    aes(label = sprintf("$%.1fT", gdp_usd_tn)),
+    hjust = -0.15,
+    color = "gray20",
+    fontface = "bold",
+    size = 3.2
+  ) +
+  scale_x_continuous(
+    expand = expansion(mult = c(0, 0.15)),
+    labels = label_dollar(suffix = "T")
+  ) +
+  scale_fill_manual(values = region_colors) +
+  labs(
+    title = "Panel A: Market Size (Nominal GDP)",
+    subtitle = "Top 15 economies in 2026 (USD Trillions)",
+    x = "GDP in 2026",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 12),
+    plot.subtitle = element_text(color = "gray40", size = 10),
+    axis.text.y = element_text(face = "bold", color = "gray20", size = 10)
+  )
+
+plot_a
+```
+
+## Panel B: Individual Affluence (GDP per Capita)
+
+Contrasting market size with individual affluence reveals a sharp divide. While the US and European nations maintain high GDP per capita (prosperity), the emerging giants China and India show significantly lower per-capita figures. This highlights that massive market scale does not yet equate to the same level of individual wealth found in established advanced economies.
+
+```{r}
+#| label: plot-b
+plot_b_affluence <- ggplot(top_15, aes(x = gdp_per_capita, y = country, fill = region)) +
+  geom_col(width = 0.75, show.legend = FALSE) +
+  geom_text(
+    aes(label = sprintf("$%.1fk", gdp_per_capita / 1000)),
+    hjust = -0.15,
+    color = "gray20",
+    fontface = "bold",
+    size = 3.2
+  ) +
+  scale_x_continuous(
+    expand = expansion(mult = c(0, 0.2)),
+    labels = label_dollar(scale = 0.001, suffix = "k")
+  ) +
+  scale_fill_manual(values = region_colors) +
+  labs(
+    title = "Panel B: Individual Affluence",
+    subtitle = "GDP per capita in 2026 (USD)",
+    x = "GDP per Capita",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 12),
+    plot.subtitle = element_text(color = "gray40", size = 10),
+    axis.text.y = element_blank()
+  )
+
+plot_b_affluence
+```
+
+## Panel C: Regional GDP Share Trends
+
+The "Shift to Asia" is most evident when examining regional shares over time. Since 2000, Asia's share of global GDP has risen from under 20% to over 30%, surpassing both the Americas and Europe. This structural transformation underscores the migration of global economic gravity toward the East.
+
+```{r}
+#| label: plot-c
+# Extract 2026 data for direct labels
+label_data <- regional_trend |>
+  filter(year == 2026)
+
+plot_c_trends <- ggplot(regional_trend, aes(x = year, y = share, color = region, group = region)) +
+  geom_line(linewidth = 1.2, show.legend = FALSE) +
+  geom_point(data = label_data, size = 2.0, show.legend = FALSE) +
+  geom_text_repel(
+    data = label_data,
+    aes(label = region),
+    direction = "y",
+    nudge_x = 0.4,
+    hjust = 0,
+    segment.color = "gray60",
+    segment.size = 0.25,
+    size = 3.6,
+    fontface = "bold",
+    box.padding = 0.15,
+    point.padding = 0.2,
+    max.overlaps = Inf,
+    show.legend = FALSE
+  ) +
+  scale_x_continuous(
+    limits = c(2000, 2027.5),
+    breaks = seq(2000, 2025, by = 5),
+    labels = c("2000", "2005", "2010", "2015", "2020", "2026"),
+    expand = expansion(mult = c(0.02, 0))
+  ) +
+  scale_y_continuous(
+    labels = label_percent(),
+    breaks = seq(0, 0.4, by = 0.1)
+  ) +
+  scale_color_manual(values = region_colors) +
+  labs(
+    title = "Panel C: Global GDP Share by Region (2000-2026)",
+    subtitle = "Regional share of total GDP; Asia's share has grown significantly",
+    x = "Year",
+    y = "Share of World GDP"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 12),
+    plot.subtitle = element_text(color = "gray40", size = 10)
+  )
+
+plot_c_trends
+```
+
+## Panel D: Summary Statistics
+
+These key performance indicators summarize the high concentration of global economic power. Just 15 countries control nearly 75% of the world's GDP. Notably, the fastest growth over the last 25 years has been seen in China (+1609%) and Russia (+855%), while the US remains the leader in per-capita prosperity among the largest economies.
+
+```{r}
+#| label: plot-d
+stats_data <- tibble(
+  x = c(1, 2, 3, 4),
+  y = c(1, 1, 1, 1),
+  value = c("74.7%", "33.4%", "China & Russia", "United States"),
+  title = c(
+    "CONCENTRATION OF WEALTH",
+    "REGIONAL POWER SHIFT",
+    "FASTEST NOMINAL GROWTH",
+    "HIGHEST INDIVIDUAL PROSPERITY"
+  ),
+  label = c(
+    "Top 15 Share of World GDP\n($93.9T of $125.7T total)",
+    "Asia's Share of Top 15 GDP\n($31.3T of $93.9T total)",
+    "Fastest growth (2000-2026)\nChina (+1609%) & Russia (+855%)",
+    "Highest GDP per Capita\n(Among Top 15; $95.2k)"
+  )
+)
+
+plot_d <- ggplot(stats_data) +
+  geom_rect(
+    aes(xmin = x - 0.45, xmax = x + 0.45, ymin = 0.55, ymax = 1.45),
+    fill = "white",
+    color = "#E2E8F0",
+    linewidth = 0.5
+  ) +
+  geom_text(
+    aes(x = x, y = 1.28, label = title),
+    size = 2.8,
+    fontface = "bold",
+    color = "gray40"
+  ) +
+  geom_text(
+    aes(x = x, y = 1.05, label = value),
+    size = 5.2,
+    fontface = "bold",
+    color = "gray10"
+  ) +
+  geom_text(
+    aes(x = x, y = 0.76, label = label),
+    size = 3.0,
+    color = "gray30",
+    lineheight = 1.0
+  ) +
+  scale_x_continuous(limits = c(0.5, 4.5)) +
+  scale_y_continuous(limits = c(0.45, 1.55)) +
+  theme_void() +
+  theme(
+    plot.margin = margin(t = 15, b = 5, l = 5, r = 5)
+  )
+
+stats_data
+```
+
+## Final Dashboard Assembly
+
+The final figure combines all insights into a single unified dashboard, facilitating multi-dimensional analysis of global economic power.
+
+```{r}
+#| label: dashboard-combine
+#| fig-width: 14
+#| fig-height: 9
+combined_plot <- plot_a + plot_b_affluence + plot_c_trends + plot_d +
+  plot_layout(
+    design = "
+      AAABBBCCCC
+      AAABBBCCCC
+      DDDDDDDDDD
+    ",
+    heights = c(4, 1.2)
+  ) +
+  plot_annotation(
+    title = "Redesigning the Global Economy: Market Size, Trends, and Individual Affluence",
+    subtitle = "A multi-dimensional comparison of the world's top 15 economies (2000-2026)",
+    caption = "Data Source: IMF World Economic Outlook (April 2026) & World Bank Population Data.",
+    theme = theme(
+      plot.title = element_text(size = 18, face = "bold", hjust = 0, margin = margin(b = 5)),
+      plot.subtitle = element_text(size = 12, hjust = 0, color = "gray30", margin = margin(b = 20)),
+      plot.caption = element_text(size = 9, color = "gray50", margin = margin(t = 15))
+    )
+  )
+
+ggsave("gdp_redesign.png", combined_plot, width = 14, height = 9, dpi = 300)
+
+combined_plot
+```
+
