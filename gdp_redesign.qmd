@@ -1,11 +1,18 @@
 ---
 title: "Global Economy Redesign"
 subtitle: "CSC3107 Information Visualization · Team Poster Project"
-author: "Team Lavender"
+author:
+  - Ang Jing Yi Clairer (2402610, 3070699A)
+  - Ryson Toh Wei Feng (2401333, 3070647T)
+  - Kenny Leck Chin Aik (2403543, 3070574L)
+  - Lim Fang Jun (2400650, 3070594L)
+  - Foo Guo Wei (2402716, 3070704F)
 date: today
 format:
   html:
     toc: true
+    toc-depth: 2
+    number-sections: true
     code-fold: show
     df-print: paged
 execute:
@@ -13,7 +20,7 @@ execute:
   message: false
 ---
 
-## Overview
+# Overview
 
 This visualization compares the world's top 15 economies by:
 
@@ -22,33 +29,192 @@ This visualization compares the world's top 15 economies by:
 3. Regional GDP share trends (2000–2026) — line chart
 
 **Data sources:** IMF World Economic Outlook (April 2026) and World Bank.
+
 **Output:** Combined multi-panel figure saved as `gdp_redesign.png`.
 
-# Setup
+# The Problem
+
+The original graphic (Visual Capitalist, *The \$126T Global Economy in One Chart*) is a
+single-year 2026 treemap. The article claims that economic weight is **shifting toward Asia**, but a one-year snapshot is structurally incapable of showing *change*. The chart asserts a trend it cannot draw.
+
+![Visual Capitalist - The $126T Global Economy in One Chart](original_visualization.webp){height="600px"}
+
+Our redesign, answers three questions the original cannot:
+
+1. **Concentration** — is global output still dominated by a handful of economies?
+2. **The shift** — is economic weight moving between regions, specifically toward Asia?
+3. **Prosperity** — among the largest economies, which are actually affluent *per person*,
+   and who is catching up?
+
+# Data Source
+
+- Nominal GDP: **IMF World Economic Outlook, April 2026**, indicator **`NGDPD`** (*GDP, current prices, USD billions*), exported from the IMF DataMapper as `data/imf-dm-export-20260624.xls`. 
+- Population: **World Bank `SP.POP.TOTL`**, downloaded in-code via `WDI` and merged to derive GDP per capita.
+
+# Design Brief
+
+- **Audience:** Economic and trade policy analysts.
+- **Analytical Task:** Compare the total economic scale of the top 15 global economies, track regional trajectories over the past decade, and contrast aggregate market size with individual affluence.
+- **Core Insight:** A higher nominal GDP does not automatically correlate to a higher GDP per capita. Massive market scale (e.g., China or India) often masks lower individual affluence due to population size, while smaller total economies (e.g., Switzerland or Australia) frequently lead in individual prosperity.
+- **Design Rationale:**
+  - **Multi-Panel Layout:** Three panels (total GDP, GDP per capita, regional trends) allow simultaneous comparison of market size, prosperity, and structural shifts.
+  - **Symmetric Horizontal Bars:** Aligned side-by-side to allow direct, eye-movement-only comparison of total GDP (market size) against GDP per capita (prosperity) for the exact same country rows.
+  - **Direct-Labeled Line Chart:** Illustrates the global regional shifts from 2016 to 2026, highlighting the dominant scale of Asia's aggregate economy without legend-lookup clutter.
+  - **Unified Region Colors:** A cohesive color-blind-friendly palette links regions across all bar, and line charts.
+
+# Data Cleaning/Transformation
+
+## Setup
+```{r}
+#| label: data-clean-transformation-setup
+library(tidyverse)
+library(readxl)
+library(countrycode)
+library(WDI)
+library(scales)
+```
+
+## Import the raw file
 
 ```{r}
-#| label: setup
+#| label: import
+raw <- read_excel("data/imf-dm-export-20260624.xls") |>
+  rename(entity = 1) # first column holds the economy/aggregate names
+dim(raw)
+```
+
+## Clean
+
+The export lists the **individual economies first** (Afghanistan → Zimbabwe), followed by
+**regional and analytical aggregates** (`Africa`, `Advanced economies`, `G-20`, …, `World`)
+and a `©IMF, 2026` footer. Summing the whole column double-counts (it reaches ~\$374T), so we
+keep only individual economies, via two defensive steps: (1) cut the table at the first
+aggregate row (`Africa`); (2) validate every remaining name against ISO-3 with
+`countrycode()`, dropping anything that does not resolve.
+
+```{r}
+#| label: clean
+# (1) cut at the first regional aggregate -> individual-economy block
+first_agg <- which(raw$entity == "Africa")[1]
+econ <- raw |>
+  slice(1:(first_agg - 1)) |>
+  filter(!is.na(entity)) |>
+  select(-any_of("Estimates start after"))
+
+# (2) wide -> long over the year columns; parse "no data" -> NA; drop missing
+year_cols <- names(econ)[str_detect(names(econ), "^[0-9]{4}$")]
+long <- econ |>
+  pivot_longer(
+    all_of(year_cols),
+    names_to = "year",
+    values_to = "gdp_usd_bn"
+  ) |>
+  mutate(
+    year = as.integer(year),
+    gdp_usd_bn = parse_number(na_if(as.character(gdp_usd_bn), "no data"))
+  ) |>
+  filter(!is.na(gdp_usd_bn))
+
+# (3) standardise to ISO-3 + UN-M49 region; non-countries -> NA iso3 -> dropped.
+#     custom_match covers IMF spellings countrycode can miss.
+custom <- c(
+  "Türkiye, Republic of" = "TUR",
+  "Kosovo" = "XKX",
+  "Micronesia, Fed. States of" = "FSM",
+  "Lao P.D.R." = "LAO"
+)
+long <- long |>
+  mutate(
+    iso3 = countrycode(
+      entity,
+      "country.name",
+      "iso3c",
+      custom_match = custom,
+      warn = FALSE
+    ),
+    country = countrycode(iso3, "iso3c", "country.name", warn = FALSE),
+    region = countrycode(iso3, "iso3c", "continent", warn = FALSE) # Africa/Americas/Asia/Europe/Oceania
+  ) |>
+  filter(!is.na(iso3))
+
+# (4) unit transformation: billions -> trillions (one consistent unit)
+long <- long |> mutate(gdp_usd_tn = gdp_usd_bn / 1000)
+
+n_distinct(long$iso3) # economies retained
+```
+
+## Write Cleaned Datasets
+
+```{r}
+#| label: write-clean
+dir.create("data", showWarnings = FALSE)
+
+# tidy long form (all years) — the canonical cleaned dataset
+gdp_long <- long |>
+  select(iso3, country, region, year, gdp_usd_bn, gdp_usd_tn) |>
+  arrange(country, year)
+write_csv(gdp_long, "data/gdp_clean_long.csv")
+
+# 2026 snapshot used by the redesign
+gdp_2026 <- gdp_long |>
+  filter(year == 2026) |>
+  select(-year) |>
+  arrange(desc(gdp_usd_tn))
+write_csv(gdp_2026, "data/gdp_clean_2026.csv")
+
+# sanity check: 2026 country total should approximate the IMF "World" row (~$126.3T)
+sprintf(
+  "2026 economies: %d | total: $%.1fT (IMF World = $126.3T)",
+  nrow(gdp_2026),
+  sum(gdp_2026$gdp_usd_tn)
+)
+```
+
+## Transform: GDP per capita
+
+The IMF file is GDP only, so population is joined from the **World Bank** indicator
+**`SP.POP.TOTL`** (via `WDI`, which downloads it in-code) to derive GDP per capita —
+separating economic *size* from *prosperity*. *(This chunk needs internet at render time;
+run it once and it writes the result for offline re-renders.)*
+
+```{r}
+#| label: percapita
+pop <- WDI(
+  indicator = c(population = "SP.POP.TOTL"),
+  start = 2024,
+  end = 2026,
+  extra = FALSE
+) |>
+  as_tibble() |>
+  filter(!is.na(population)) |>
+  mutate(iso3 = countrycode(iso2c, "iso2c", "iso3c", warn = FALSE)) |>
+  filter(!is.na(iso3)) |>
+  group_by(iso3) |>
+  slice_max(year, n = 1, with_ties = FALSE) |> # latest available population
+  ungroup() |>
+  select(iso3, population)
+
+gdp_2026_pc <- gdp_2026 |>
+  left_join(pop, by = "iso3") |>
+  mutate(gdp_per_capita = gdp_usd_tn * 1e12 / population)
+
+write_csv(gdp_2026_pc, "data/gdp_2026_with_percapita.csv")
+gdp_2026_pc |> slice_max(gdp_usd_tn, n = 8)
+```
+
+# Data Preparation
+
+## Setup
+
+```{r}
+#| label: data-preparation-setup
 library(tidyverse)
 library(scales)
 library(patchwork)
 theme_set(theme_minimal(base_size = 12))
 ```
 
-::: {.callout-note appearance="simple" icon=false}
-### **Design Brief**
-**Audience:** Economic and trade policy analysts.
-
-**Analytical Task:** Compare the total economic scale of the top 15 global economies, track regional trajectories over the past decade, and contrast aggregate market size with individual affluence.
-
-**Design Rationale:**
-
-- **Symmetric Horizontal Bars:** Aligned side-by-side to allow direct, eye-movement-only comparison of total GDP (market size) against GDP per capita (prosperity) for the exact same country rows.
-- **Direct-Labeled Line Chart:** Illustrates the global regional shifts from 2016 to 2026, highlighting the dominant scale of Asia's aggregate economy without legend-lookup clutter.
-- **Unified Region Colors:** A cohesive color-blind-friendly palette links regions across all bar, line, and KPI card panels.
-- **Structured KPI Banner:** Synthesizes high-level macro statistics at the bottom for quick executive scanning.
-:::
-
-# Data Preparation
+## Data Preparation for Panel
 
 ```{r}
 #| label: data-prep
@@ -201,7 +367,7 @@ plot_c_trends <- ggplot(regional_trend, aes(x = year, y = share, color = region,
 plot_c_trends
 ```
 
-## Final Dashboard Assembly
+# Final Dashboard Assembly
 
 The final figure combines all insights into a single unified dashboard, facilitating multi-dimensional analysis of global economic power.
 
@@ -251,3 +417,7 @@ ggsave("gdp_redesign.png", combined_plot, width = 14, height = 6.5, dpi = 300)
 combined_plot
 ```
 
+# References
+1. International Monetary Fund (2026). *World Economic Outlook Database: April 2026*. Indicator: Gross Domestic Product, current prices (NGDPD). Available at: <https://www.imf.org/external/datamapper/NGDPD@WEO/WEOWORLD>
+2. World Bank Group (2026). *World Development Indicators*. Indicator: Population, total (SP.POP.TOTL). Available via API query endpoints at: <https://databank.worldbank.org/source/world-development-indicators>
+3. Visual Capitalist (2026). *The $126T Global Economy in One Chart*. Available at: <https://www.visualcapitalist.com/the-126t-global-economy-in-one-chart/>
