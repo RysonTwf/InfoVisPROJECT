@@ -53,8 +53,13 @@ Our redesign, answers three questions the original cannot:
 
 # Design Brief
 
-- **Audience:** Economic and trade policy analysts.
-- **Analytical Task:** Compare the total economic scale of the top 15 global economies, track regional trajectories over the past decade, and contrast aggregate market size with individual affluence.
+This redesign is intended for economic and trade-policy analysts prioritizing global markets and trade partnerships. The goal is to clearly rank and compare the total absolute market size of individual economies for the year 2026. In addition, it also aims to show that the economic weight is shifting towards Asia since 2000.
+
+- **Revisions:**
+  - Side by side horizontal bar chart comparison for nominal GDP and individual affluence
+  - Line chart to show the GDP share by region trend
+  - Distinct colour palette for each region
+  - Standardized units in USD trillions
 - **Core Insight:** A higher nominal GDP does not automatically correlate to a higher GDP per capita. Massive market scale (e.g., China or India) often masks lower individual affluence due to population size, while smaller total economies (e.g., Switzerland or Australia) frequently lead in individual prosperity.
 - **Design Rationale:**
   - **Multi-Panel Layout:** Three panels (total GDP, GDP per capita, regional trends) allow simultaneous comparison of market size, prosperity, and structural shifts.
