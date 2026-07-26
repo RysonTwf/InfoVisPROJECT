@@ -49,7 +49,7 @@ Our redesign, answers three questions the original cannot:
 # Data Source
 
 - Nominal GDP: **IMF World Economic Outlook, April 2026**, indicator **`NGDPD`** (*GDP, current prices, USD billions*), exported from the IMF DataMapper as `data/imf-dm-export-20260624.xls`. 
-- Population: **World Bank `SP.POP.TOTL`**, downloaded in-code via `WDI` and merged to derive GDP per capita.
+- Population: **World Bank `SP.POP.TOTL`**, supplied as `data/pop_raw.csv` and merged to derive GDP per capita.
 
 # Design Brief
 
@@ -75,7 +75,6 @@ This redesign is intended for economic and trade-policy analysts prioritizing gl
 library(tidyverse)
 library(readxl)
 library(countrycode)
-library(WDI)
 library(scales)
 ```
 
@@ -177,27 +176,21 @@ sprintf(
 
 ## Transform: GDP per capita
 
-The IMF file is GDP only, so population is joined from the **World Bank** indicator
-**`SP.POP.TOTL`** (via `WDI`, which downloads it in-code) to derive GDP per capita —
-separating economic *size* from *prosperity*. *(This chunk needs internet at render time;
-run it once and it writes the result for offline re-renders.)*
+The IMF file is GDP only, so population is joined from the included raw
+**World Bank** indicator **`SP.POP.TOTL`** file (`data/pop_raw.csv`) to derive GDP per
+capita. Using the submitted raw file makes the complete render reproducible without an
+internet connection. Because 2026 population is not yet available, the calculation uses
+the latest non-missing population observation and retains its year for transparency.
 
 ```{r}
 #| label: percapita
-pop <- WDI(
-  indicator = c(population = "SP.POP.TOTL"),
-  start = 2024,
-  end = 2026,
-  extra = FALSE
-) |>
-  as_tibble() |>
+pop <- read_csv("data/pop_raw.csv", show_col_types = FALSE) |>
   filter(!is.na(population)) |>
-  mutate(iso3 = countrycode(iso2c, "iso2c", "iso3c", warn = FALSE)) |>
-  filter(!is.na(iso3)) |>
-  group_by(iso3) |>
-  slice_max(year, n = 1, with_ties = FALSE) |> # latest available population
+  filter(!is.na(iso3c)) |>
+  group_by(iso3c) |>
+  slice_max(year, n = 1, with_ties = FALSE) |>
   ungroup() |>
-  select(iso3, population)
+  transmute(iso3 = iso3c, population_year = year, population)
 
 gdp_2026_pc <- gdp_2026 |>
   left_join(pop, by = "iso3") |>
@@ -225,12 +218,18 @@ theme_set(theme_minimal(base_size = 12))
 #| label: data-prep
 
 # Data Loading
-gdp_2026_pc <- read_csv("data/gdp_2026_with_percapita.csv", show_col_types = FALSE)
+gdp_2026_pc <- read_csv(
+  "data/gdp_2026_with_percapita.csv",
+  show_col_types = FALSE
+)
 gdp_long <- read_csv("data/gdp_clean_long.csv", show_col_types = FALSE)
 
 # Color Palette (ColorBrewer Set1)
 region_pal <- brewer_pal(palette = "Set1")
-region_colors <- setNames(region_pal(5), c("Asia", "Americas", "Europe", "Oceania", "Africa"))
+region_colors <- setNames(
+  region_pal(5),
+  c("Asia", "Americas", "Europe", "Oceania", "Africa")
+)
 
 # Top 15 economies by total GDP, ordered for plotting
 top_15 <- gdp_2026_pc |>
@@ -238,9 +237,9 @@ top_15 <- gdp_2026_pc |>
   mutate(country = fct_reorder(country, gdp_usd_tn)) |>
   mutate(region = factor(region, levels = names(region_colors)))
 
-# Regional GDP share over time (2000–2026)
+# Regional GDP share over time (2000–2030)
 regional_trend <- gdp_long |>
-  filter(!is.na(region), year >= 2000, year <= 2026) |>
+  filter(!is.na(region), year >= 2000, year <= 2030) |>
   group_by(year, region) |>
   summarize(gdp_usd_tn = sum(gdp_usd_tn), .groups = "drop_last") |>
   mutate(share = gdp_usd_tn / sum(gdp_usd_tn))
@@ -253,7 +252,6 @@ region_order <- regional_trend |>
 
 regional_trend <- regional_trend |>
   mutate(region = factor(region, levels = region_order))
-
 ```
 
 ## Panel A: Market Size (Total GDP)
@@ -300,7 +298,10 @@ Contrasting market size with individual affluence reveals a sharp divide. While 
 
 ```{r}
 #| label: plot-b
-plot_b_affluence <- ggplot(top_15, aes(x = gdp_per_capita, y = country, fill = region)) +
+plot_b_affluence <- ggplot(
+  top_15,
+  aes(x = gdp_per_capita, y = country, fill = region)
+) +
   geom_col(width = 0.75, show.legend = FALSE) +
   geom_text(
     aes(label = sprintf("$%.1fk", gdp_per_capita / 1000)),
@@ -338,17 +339,29 @@ The "Shift to Asia" is most evident when examining regional shares over time. Si
 
 ```{r}
 #| label: plot-c
-# Extract 2026 data for direct labels
+# Mark the boundary between historical values and projections
 label_data <- regional_trend |>
   filter(year == 2026)
 
-plot_c_trends <- ggplot(regional_trend, aes(x = year, y = share, color = region, group = region)) +
-  geom_line(linewidth = 1.2, show.legend = FALSE) +
+plot_c_trends <- ggplot(
+  regional_trend,
+  aes(x = year, y = share, color = region, group = region)
+) +
+  geom_line(
+    data = regional_trend |> filter(year <= 2026),
+    linewidth = 1.2,
+    show.legend = FALSE
+  ) +
+  geom_line(
+    data = regional_trend |> filter(year >= 2026),
+    linewidth = 1.2,
+    linetype = "dotted",
+    show.legend = FALSE
+  ) +
   geom_point(data = label_data, size = 2.0, show.legend = FALSE) +
   scale_x_continuous(
-    limits = c(2000, 2027.5),
-    breaks = seq(2000, 2025, by = 5),
-    labels = c("2000", "2005", "2010", "2015", "2020", "2026"),
+    limits = c(2000, 2030),
+    breaks = c(2000, 2005, 2010, 2015, 2020, 2026, 2030),
     expand = expansion(mult = c(0.02, 0))
   ) +
   scale_y_continuous(
@@ -357,8 +370,8 @@ plot_c_trends <- ggplot(regional_trend, aes(x = year, y = share, color = region,
   ) +
   scale_color_manual(values = region_colors) +
   labs(
-    title = "Panel C: Global GDP Share by Region (2000-2026)",
-    subtitle = "Regional share of total GDP; Asia's share has grown significantly",
+    title = "Panel C: Global GDP Share by Region (2000-2030)",
+    subtitle = "Regional GDP share; dotted: 2026–2030 projections",
     x = "Year",
     y = "Share of World GDP"
   ) +
@@ -386,8 +399,14 @@ legend_data <- tibble(region = names(region_colors))
 region_legend <- ggplot(legend_data, aes(x = 1, y = 1, fill = region)) +
   geom_tile(alpha = 0) +
   scale_fill_manual(values = region_colors, drop = FALSE) +
-  guides(fill = guide_legend(nrow = 1, title = "Region",
-    title.position = "top", override.aes = list(alpha = 1))) +
+  guides(
+    fill = guide_legend(
+      nrow = 1,
+      title = "Region",
+      title.position = "top",
+      override.aes = list(alpha = 1)
+    )
+  ) +
   theme_void() +
   theme(
     legend.position = "bottom",
@@ -397,7 +416,10 @@ region_legend <- ggplot(legend_data, aes(x = 1, y = 1, fill = region)) +
     plot.margin = margin(0, 0, 0, 0)
   )
 
-combined_plot <- plot_a + plot_b_affluence + plot_c_trends + region_legend +
+combined_plot <- plot_a +
+  plot_b_affluence +
+  plot_c_trends +
+  region_legend +
   plot_layout(
     design = "
       AAABBBCCC
@@ -411,9 +433,23 @@ combined_plot <- plot_a + plot_b_affluence + plot_c_trends + region_legend +
     subtitle = "A comparison of the world's top 15 economies (2000-2026)",
     caption = "Data Source: IMF World Economic Outlook (April 2026) & World Bank Population Data.",
     theme = theme(
-      plot.title = element_text(size = 18, face = "bold", hjust = 0, margin = margin(b = 5)),
-      plot.subtitle = element_text(size = 12, hjust = 0, color = "gray30", margin = margin(b = 20)),
-      plot.caption = element_text(size = 9, color = "gray50", margin = margin(t = 15))
+      plot.title = element_text(
+        size = 18,
+        face = "bold",
+        hjust = 0,
+        margin = margin(b = 5)
+      ),
+      plot.subtitle = element_text(
+        size = 12,
+        hjust = 0,
+        color = "gray30",
+        margin = margin(b = 20)
+      ),
+      plot.caption = element_text(
+        size = 9,
+        color = "gray50",
+        margin = margin(t = 15)
+      )
     )
   )
 
