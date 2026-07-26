@@ -12,7 +12,7 @@ render `gdp_redesign.qmd`.
 ## Restore the R environment
 
 Extract or clone the complete project into a local folder. Open R in the
-project root—the folder containing `renv.lock`—and run:
+project root (the folder containing `renv.lock`) and run:
 
 ```r
 install.packages("renv")

@@ -24,9 +24,9 @@ execute:
 
 This visualization compares the world's top 15 economies by:
 
-1. Total GDP (market size) — horizontal bar chart
-2. GDP per capita (individual affluence) — horizontal bar chart
-3. Regional GDP share trends (2000–2026) — line chart
+1. Total GDP (market size): horizontal bar chart
+2. GDP per capita (individual affluence): horizontal bar chart
+3. Regional GDP share trends (2000-2026): line chart
 
 **Data sources:** IMF World Economic Outlook (April 2026) and World Bank.
 
@@ -41,9 +41,9 @@ single-year 2026 treemap. The article claims that economic weight is **shifting 
 
 Our redesign, answers three questions the original cannot:
 
-1. **Concentration** — is global output still dominated by a handful of economies?
-2. **The shift** — is economic weight moving between regions, specifically toward Asia?
-3. **Prosperity** — among the largest economies, which are actually affluent *per person*,
+1. **Concentration:** is global output still dominated by a handful of economies?
+2. **The shift:** is economic weight moving between regions, specifically toward Asia?
+3. **Prosperity:** among the largest economies, which are actually affluent *per person*,
    and who is catching up?
 
 # Data Source
@@ -65,7 +65,7 @@ This redesign is intended for economic and trade-policy analysts prioritizing gl
   - **Multi-Panel Layout:** Three panels (total GDP, GDP per capita, regional trends) allow simultaneous comparison of market size, prosperity, and structural shifts.
   - **Symmetric Horizontal Bars:** Aligned side-by-side to allow direct, eye-movement-only comparison of total GDP (market size) against GDP per capita (prosperity) for the exact same country rows.
   - **Direct-Labeled Line Chart:** Illustrates the global regional shifts from 2000 to 2026, with forecasts extending to 2030, highlighting the dominant scale of Asia's aggregate economy without legend-lookup clutter.
-  - **Unified Region Colors:** A palette links regions across all bar, and line charts.
+  - **Unified Region Colors:** A colour-blind-safe palette (Okabe & Ito, 2008) links regions across all bar and line charts.
 
 # Data Cleaning/Transformation
 
@@ -153,7 +153,7 @@ n_distinct(long$iso3) # economies retained
 #| label: write-clean
 dir.create("data", showWarnings = FALSE)
 
-# tidy long form (all years) — the canonical cleaned dataset
+# tidy long form (all years): the canonical cleaned dataset
 gdp_long <- long |>
   select(iso3, country, region, year, gdp_usd_bn, gdp_usd_tn) |>
   arrange(country, year)
@@ -224,11 +224,13 @@ gdp_2026_pc <- read_csv(
 )
 gdp_long <- read_csv("data/gdp_clean_long.csv", show_col_types = FALSE)
 
-# Color Palette (ColorBrewer Set1)
-region_pal <- brewer_pal(palette = "Set1")
-region_colors <- setNames(
-  region_pal(5),
-  c("Asia", "Americas", "Europe", "Oceania", "Africa")
+# Color Palette (Okabe & Ito, 2008, colour-blind-safe)
+region_colors <- c(
+  Asia     = "#D55E00",  # vermillion
+  Americas = "#0072B2",  # blue
+  Europe   = "#009E73",  # bluish green
+  Oceania  = "#CC79A7",  # reddish purple
+  Africa   = "#E69F00"   # orange
 )
 
 # Top 15 economies by total GDP, ordered for plotting
@@ -336,6 +338,8 @@ plot_b_affluence
 ## Panel C: Regional GDP Share Trends
 
 The "Shift to Asia" is most evident when examining regional shares over time. Since 2000, Asia's share of global GDP has risen, surpassing both the Americas and Europe. This structural transformation underscores the migration of global economic gravity toward the East.
+
+**Key insight:** Since 2000, Asia has overtaken the Americas as the world's largest regional economy: its share of world GDP climbed from 29% to 35%, while the Americas fell from 39% to 34% and Europe fell from 28% to 26%.
 
 ```{r}
 #| label: plot-c
