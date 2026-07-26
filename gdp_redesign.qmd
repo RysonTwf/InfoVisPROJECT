@@ -60,12 +60,12 @@ This redesign is intended for economic and trade-policy analysts prioritizing gl
   - Line chart to show the GDP share by region trend
   - Distinct colour palette for each region
   - Standardized units in USD trillions
-- **Core Insight:** A higher nominal GDP does not automatically correlate to a higher GDP per capita. Massive market scale (e.g., China or India) often masks lower individual affluence due to population size, while smaller total economies (e.g., Switzerland or Australia) frequently lead in individual prosperity.
+- **Core Insight:** A higher nominal GDP does not automatically correlate to a higher GDP per capita. Massive market scale (e.g., China or India) often masks lower individual affluence due to population size, while smaller total economies (e.g., Canada or Australia) frequently lead in individual prosperity.
 - **Design Rationale:**
   - **Multi-Panel Layout:** Three panels (total GDP, GDP per capita, regional trends) allow simultaneous comparison of market size, prosperity, and structural shifts.
   - **Symmetric Horizontal Bars:** Aligned side-by-side to allow direct, eye-movement-only comparison of total GDP (market size) against GDP per capita (prosperity) for the exact same country rows.
-  - **Direct-Labeled Line Chart:** Illustrates the global regional shifts from 2016 to 2026, highlighting the dominant scale of Asia's aggregate economy without legend-lookup clutter.
-  - **Unified Region Colors:** A cohesive color-blind-friendly palette links regions across all bar, and line charts.
+  - **Direct-Labeled Line Chart:** Illustrates the global regional shifts from 2000 to 2026, with forecasts extending to 2030, highlighting the dominant scale of Asia's aggregate economy without legend-lookup clutter.
+  - **Unified Region Colors:** A palette links regions across all bar, and line charts.
 
 # Data Cleaning/Transformation
 
@@ -256,7 +256,7 @@ regional_trend <- regional_trend |>
 
 ## Panel A: Market Size (Total GDP)
 
-The United States and China dominate the global landscape, together accounting for nearly half of the top 15's total output. While the US maintains the top position at $32.4T, China follows closely at $20.9T, with a significant drop-off to the next tier of economies like Germany and Japan.
+The United States and China dominate the global landscape. While the US maintains the top position at $32.4T, China follows closely at $20.9T, with a significant drop-off to the next tier of economies like Germany and Japan.
 
 ```{r}
 #| label: plot-a
@@ -335,7 +335,7 @@ plot_b_affluence
 
 ## Panel C: Regional GDP Share Trends
 
-The "Shift to Asia" is most evident when examining regional shares over time. Since 2000, Asia's share of global GDP has risen from under 20% to over 30%, surpassing both the Americas and Europe. This structural transformation underscores the migration of global economic gravity toward the East.
+The "Shift to Asia" is most evident when examining regional shares over time. Since 2000, Asia's share of global GDP has risen, surpassing both the Americas and Europe. This structural transformation underscores the migration of global economic gravity toward the East.
 
 ```{r}
 #| label: plot-c
@@ -430,7 +430,7 @@ combined_plot <- plot_a +
   ) +
   plot_annotation(
     title = "Redesigning the Global Economy: Market Size, Trends, and Individual Affluence",
-    subtitle = "A comparison of the world's top 15 economies (2000-2026)",
+    subtitle = "A comparison of the world's top 15 economies (2026) and regional GDP share (2000-2030)",
     caption = "Data Source: IMF World Economic Outlook (April 2026) & World Bank Population Data.",
     theme = theme(
       plot.title = element_text(

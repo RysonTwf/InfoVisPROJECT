@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="gdp_redesign_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="gdp_redesign_files/libs/quarto-html/anchor.min.js"></script>
 <link href="gdp_redesign_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="gdp_redesign_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="gdp_redesign_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="gdp_redesign_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="gdp_redesign_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="gdp_redesign_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="gdp_redesign_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="gdp_redesign_files/libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="gdp_redesign_files/libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -200,13 +200,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Distinct colour palette for each region</li>
 <li>Standardized units in USD trillions</li>
 </ul></li>
-<li><strong>Core Insight:</strong> A higher nominal GDP does not automatically correlate to a higher GDP per capita. Massive market scale (e.g., China or India) often masks lower individual affluence due to population size, while smaller total economies (e.g., Switzerland or Australia) frequently lead in individual prosperity.</li>
+<li><strong>Core Insight:</strong> A higher nominal GDP does not automatically correlate to a higher GDP per capita. Massive market scale (e.g., China or India) often masks lower individual affluence due to population size, while smaller total economies (e.g., Canada or Australia) frequently lead in individual prosperity.</li>
 <li><strong>Design Rationale:</strong>
 <ul>
 <li><strong>Multi-Panel Layout:</strong> Three panels (total GDP, GDP per capita, regional trends) allow simultaneous comparison of market size, prosperity, and structural shifts.</li>
 <li><strong>Symmetric Horizontal Bars:</strong> Aligned side-by-side to allow direct, eye-movement-only comparison of total GDP (market size) against GDP per capita (prosperity) for the exact same country rows.</li>
-<li><strong>Direct-Labeled Line Chart:</strong> Illustrates the global regional shifts from 2016 to 2026, highlighting the dominant scale of Asia’s aggregate economy without legend-lookup clutter.</li>
-<li><strong>Unified Region Colors:</strong> A cohesive color-blind-friendly palette links regions across all bar, and line charts.</li>
+<li><strong>Direct-Labeled Line Chart:</strong> Illustrates the global regional shifts from 2000 to 2026, with forecasts extending to 2030, highlighting the dominant scale of Asia’s aggregate economy without legend-lookup clutter.</li>
+<li><strong>Unified Region Colors:</strong> A palette links regions across all bar, and line charts.</li>
 </ul></li>
 </ul>
 </section>
@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="panel-a-market-size-total-gdp" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="panel-a-market-size-total-gdp"><span class="header-section-number">6.3</span> Panel A: Market Size (Total GDP)</h2>
-<p>The United States and China dominate the global landscape, together accounting for nearly half of the top 15’s total output. While the US maintains the top position at $32.4T, China follows closely at $20.9T, with a significant drop-off to the next tier of economies like Germany and Japan.</p>
+<p>The United States and China dominate the global landscape. While the US maintains the top position at $32.4T, China follows closely at $20.9T, with a significant drop-off to the next tier of economies like Germany and Japan.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -514,7 +514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="panel-c-regional-gdp-share-trends" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="panel-c-regional-gdp-share-trends"><span class="header-section-number">6.5</span> Panel C: Regional GDP Share Trends</h2>
-<p>The “Shift to Asia” is most evident when examining regional shares over time. Since 2000, Asia’s share of global GDP has risen from under 20% to over 30%, surpassing both the Americas and Europe. This structural transformation underscores the migration of global economic gravity toward the East.</p>
+<p>The “Shift to Asia” is most evident when examining regional shares over time. Since 2000, Asia’s share of global GDP has risen, surpassing both the Americas and Europe. This structural transformation underscores the migration of global economic gravity toward the East.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -615,7 +615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
 <span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Redesigning the Global Economy: Market Size, Trends, and Individual Affluence"</span>,</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"A comparison of the world's top 15 economies (2000-2026)"</span>,</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"A comparison of the world's top 15 economies (2026) and regional GDP share (2000-2030)"</span>,</span>
 <span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data Source: IMF World Economic Outlook (April 2026) &amp; World Bank Population Data."</span>,</span>
 <span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
 <span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
