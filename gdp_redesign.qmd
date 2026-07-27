@@ -164,7 +164,6 @@ gdp_2026 <- gdp_long |>
   filter(year == 2026) |>
   select(-year) |>
   arrange(desc(gdp_usd_tn))
-write_csv(gdp_2026, "data/gdp_clean_2026.csv")
 
 # sanity check: 2026 country total should approximate the IMF "World" row (~$126.3T)
 sprintf(
@@ -226,11 +225,11 @@ gdp_long <- read_csv("data/gdp_clean_long.csv", show_col_types = FALSE)
 
 # Color Palette (Okabe & Ito, 2008, colour-blind-safe)
 region_colors <- c(
-  Asia     = "#D55E00",  # vermillion
-  Americas = "#0072B2",  # blue
-  Europe   = "#009E73",  # bluish green
-  Oceania  = "#CC79A7",  # reddish purple
-  Africa   = "#E69F00"   # orange
+  Asia = "#D55E00", # vermillion
+  Americas = "#0072B2", # blue
+  Europe = "#009E73", # bluish green
+  Oceania = "#CC79A7", # reddish purple
+  Africa = "#E69F00" # orange
 )
 
 # Top 15 economies by total GDP, ordered for plotting
@@ -350,7 +349,7 @@ label_data <- regional_trend |>
     vjust_val = case_when(
       region == "Asia" ~ -0.8,
       region == "Americas" ~ 1.8,
-      region == "Europe" ~ -0.8, 
+      region == "Europe" ~ -0.8,
       region == "Africa" ~ -0.8,
       region == "Oceania" ~ 1.8
     )
@@ -374,13 +373,13 @@ plot_c_trends <- ggplot(
   ) +
   geom_point(data = label_data, size = 2.0, show.legend = FALSE) +
   geom_text(
-  data = label_data,
-  aes(label = sprintf("%.0f%%", share * 100), vjust = vjust_val),
-  fontface = "bold",
-  size = 3.2,
-  show.legend = FALSE
-) +
-coord_cartesian(clip = "off") +
+    data = label_data,
+    aes(label = sprintf("%.0f%%", share * 100), vjust = vjust_val),
+    fontface = "bold",
+    size = 3.2,
+    show.legend = FALSE
+  ) +
+  coord_cartesian(clip = "off") +
   scale_x_continuous(
     limits = c(2000, 2030),
     breaks = c(2000, 2005, 2010, 2015, 2020, 2026, 2030),
