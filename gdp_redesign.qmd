@@ -345,7 +345,17 @@ The "Shift to Asia" is most evident when examining regional shares over time. Si
 #| label: plot-c
 # Mark the boundary between historical values and projections
 label_data <- regional_trend |>
-  filter(year == 2026)
+  filter(year == 2026) |>
+  mutate(
+    vjust_val = case_when(
+      region == "Asia" ~ -0.8,
+      region == "Americas" ~ 1.8,
+      region == "Europe" ~ -0.8, 
+      region == "Africa" ~ -0.8,
+      region == "Oceania" ~ 1.8
+    )
+  )
+
 
 plot_c_trends <- ggplot(
   regional_trend,
@@ -363,6 +373,14 @@ plot_c_trends <- ggplot(
     show.legend = FALSE
   ) +
   geom_point(data = label_data, size = 2.0, show.legend = FALSE) +
+  geom_text(
+  data = label_data,
+  aes(label = sprintf("%.0f%%", share * 100), vjust = vjust_val),
+  fontface = "bold",
+  size = 3.2,
+  show.legend = FALSE
+) +
+coord_cartesian(clip = "off") +
   scale_x_continuous(
     limits = c(2000, 2030),
     breaks = c(2000, 2005, 2010, 2015, 2020, 2026, 2030),
